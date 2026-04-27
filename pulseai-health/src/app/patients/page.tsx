@@ -195,13 +195,25 @@ export default function PatientsPage() {
   
   // Add Patient Modal State
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
-  const [newPatient, setNewPatient] = useState({
+  const [newPatient, setNewPatient] = useState<{
+    name: string;
+    age: number;
+    gender: 'male' | 'female' | 'other';
+    room: string;
+    doctor: string;
+    status: 'stable' | 'warning' | 'critical';
+    riskScore: number;
+    heartRate: number;
+    spo2: number;
+    temperature: number;
+    conditions: string;
+  }>({
     name: '',
     age: 30,
-    gender: 'male' as const,
+    gender: 'male',
     room: '',
     doctor: '',
-    status: 'stable' as const,
+    status: 'stable',
     riskScore: 0,
     heartRate: 75,
     spo2: 98,
@@ -264,7 +276,8 @@ export default function PatientsPage() {
     addPatient({
       ...newPatient,
       conditions: newPatient.conditions ? newPatient.conditions.split(',').map(s => s.trim()) : [],
-      riskScore: riskPreview.score
+      riskScore: riskPreview.score,
+      healthScoreHistory: []
     }, [
       { type: 'heart_rate', value: newPatient.heartRate },
       { type: 'spo2', value: newPatient.spo2 },

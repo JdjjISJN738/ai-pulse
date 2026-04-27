@@ -64,7 +64,7 @@ class MockHealthService {
         for (let j = 0; j < numReadings; j++) {
           const reading = generateMockVitalReading(patient.id, device.id, type)
           // Set cumulative timestamps in the past
-          reading.timestamp = new Date(Date.now() - (j * 5 * 60 * 1000)).toISOString()
+          reading.timestamp = new Date(Date.now() - (j * 5 * 60 * 1000))
           this.vitalReadings.push(reading)
         }
       })
@@ -355,7 +355,7 @@ class MockHealthService {
           type: type,
           value: initial.value,
           unit: type === 'heart_rate' ? 'bpm' : type === 'spo2' ? '%' : type === 'temperature' ? '°C' : 'mmHg',
-          timestamp: new Date().toISOString(),
+          timestamp: new Date(),
           isNormal: true // Simplified for now
         }
         newPatient.vitals.push(reading)
